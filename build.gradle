@@ -1,0 +1,38 @@
+buildscript {
+  ext.versions = [
+      kotlin: "1.0.6",
+  ]
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+  }
+}
+repositories {
+  jcenter()
+}
+
+apply plugin: "application"
+apply plugin: "kotlin"
+mainClassName = "Main"
+
+dependencies {
+  compile(
+    "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin",
+  )
+}
+
+sourceSets {
+  main {
+    java {
+      srcDirs = ['src/']
+    }
+  }
+}
+
+run {
+  if (project.hasProperty("appArgs")) {
+    args(Eval.me(appArgs))
+  }
+}
